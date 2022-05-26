@@ -15,19 +15,17 @@ def sort(array):
     pivot = array[0]
 
     # ここから記述
-    left = 0
-    right = len(array) - 1
-    if len(array) == 2:
-        if array[right] < pivot:
-            array[left], array[right] = array[right], array[left]
-        return sort(array[:right]) + sort(array[right:])
-    while left < right:
-        while left < right and array[left] < pivot:
+    left = 0    #探索範囲の左端
+    right = len(array) - 1    #探索範囲の右端
+    while left < right:      #探索がぶつかるまで
+        while left < right and array[left] < pivot:     #左からの探索
             left += 1
-        while left < right and array[right] >= pivot:
+        while left < right and array[right] >= pivot:   #右からの探索
             right -= 1
-        if left < right:
+        if left < right:    #入れ替え処理
             array[left], array[right] = array[right], array[left]
+    if left == 0:   #左端の要素が最も小さい時
+        left = 1    #分割位置を左から1個目の要素と2個目の要素の間に指定
     return sort(array[:left]) + sort(array[left:])
 
     # ここまで記述
